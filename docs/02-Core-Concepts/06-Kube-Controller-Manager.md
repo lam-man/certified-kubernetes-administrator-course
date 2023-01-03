@@ -8,7 +8,15 @@ In this section, we will take a look at kube-controller-manager.
 - In kubernetes terms, a controller is a process that continuously monitors the state of the components within the system and works towards bringing the whole system to the desired functioning state.
 
 ## Node Controller
-   - Responsible for monitoring the state of the Nodes and taking necessary actions to keep the application running. 
+- Responsible for monitoring the state of the Nodes and taking necessary actions to keep the application running. It checks all the nodes every 5s and marks certain node as down if there is no response after waiting for 40s. It then gives 5 minutes to the node to see it can come back to healthy status. If the node didn't come back, it will remove all the pods and allocate pods in other nodes.
+
+  - Time period control can be done through the following parameters
+    - `--node-monitor-period=5s`
+    - `--node-eviction-grace-period=40s`
+    - `--pod-eviction-timeout=5m0s`
+  - Config enabling controllers
+    - `--controllers` 
+      - List all the enabled controller.
   
    ![node-controller](../../images/node-controller.PNG)
    

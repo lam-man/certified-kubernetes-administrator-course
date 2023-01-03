@@ -5,9 +5,24 @@ In this section, we will talk about kube-apiserver in kubernetes
 
 #### Kube-apiserver is the primary component in kubernetes.
 - Kube-apiserver is responsible for **`authenticating`**, **`validating`** requests, **`retrieving`** and **`Updating`** data in ETCD key-value store. In fact kube-apiserver is the only component that interacts directly to the etcd datastore. The other components such as kube-scheduler, kube-controller-manager and kubelet uses the API-Server to update in the cluster in their respective areas.
-  
+
+- Role of the other components
+  Using pods creation as an example
+  - kube-scheduler
+    - continuously monitoring the kube-apiserver and realized that there is a new pod not allocated.
+    - identify the correct node and communicate back to kube-apiserver
+  - kube-apiserver
+    - udpate the ETCD clsuter with the correct node information.
+    - pass the information to the kubelet in the corresponding node
+  - kubelet
+    - creates the pod
+    - inform the container runtime on deploying the application image
+    - communicate the information back to kube-apiserver
+  - kube-apiserver
+    - update the status in ETCD cluster
+
   ![post](../../images/post.PNG)
-  
+
 ## Installing kube-apiserver
 
 - If you are bootstrapping kube-apiserver using **`kubeadm`** tool, then you don't need to know this, but if you are setting up using the hardway then kube-apiserver is available as a binary in the kubernetes release page.
