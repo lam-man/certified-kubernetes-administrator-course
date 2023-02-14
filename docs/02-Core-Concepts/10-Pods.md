@@ -29,6 +29,8 @@ In this section, we will take a look at PODS.
 ## How to deploy pods?
 Lets now take a look to create a nginx pod using **`kubectl`**.
 
+> NOTE: Containers in the same pod share the same network namespace, same storage and same lifecycle.
+
 - To deploy a docker container by creating a POD.
   ```
   $ kubectl run nginx --image nginx
