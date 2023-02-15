@@ -49,7 +49,7 @@ In this section, we will take a look at kubernetes deployments
   ```
   $ kubectl get pods
   ```
-    
+
   ![deployment1](../../images/deployment1.PNG)
   
 - To see the all objects at once
@@ -57,6 +57,13 @@ In this section, we will take a look at kubernetes deployments
   $ kubectl get all
   ```
   ![deployment2](../../images/deployment2.PNG)
+
+- :question: Why we need a deployment? 
+  - :key: Many aspects
+    - Rolling upgrade.
+    - Rollback if deployment failed.
+    - Update pods at the same time. (We can achieve this with ReplicaSet)
+- :question: How deployment achieved rolling upgrade? Can we customize the percentage of pods in rolling upgrade?
   
 K8s Reference Docs:
 - https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
